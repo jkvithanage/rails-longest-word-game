@@ -7,17 +7,20 @@ class GamesController < ApplicationController
   end
 
   def score
+    @score = 0
     @word = params[:word].upcase
     @letters = JSON.parse(params[:letters])
     if on_the_grid?(@word, @letters)
       if valid_word?(@word)
         @status = "Congratulations! <strong>#{@word}</strong> is a valid English word!"
+        @score = @word.length
       else
-        @status = "Sorry but #{@word} does not seem to be a valid English word..."
+        @status = "Sorry but <strong>#{@word}</strong> does not seem to be a valid English word..."
       end
     else
-      @status = "Sorry but #{@word} can't be built out of #{@lertters}"
+      @status = "Sorry but <strong>#{@word}</strong> can't be built out of (#{@letters.join(' ')})"
     end
+    session[:total_score] += @score
   end
 
   private

@@ -1,4 +1,7 @@
-<h1>Result</h1>
-<p><%= @status.html_safe %></p>
+<div class="container mt-3">
+  <h1>Result</h1>
+  <p><%= @status.html_safe %></p>
+  <h2 class="mt-3">Total score: <%= session[:total_score] %></h2>
 
-<p><%= link_to "Play again", "/new"%></p>
+  <p><%= link_to "Play again", root_path, { :class => "btn btn-primary mt-3" } %></p>
+</div>
